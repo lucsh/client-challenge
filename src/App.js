@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+import parseName from './utils/parseNames';
+
 import getTimezones from './api/getTimezones';
 import putTimezone from './api/putTimezone';
 import deleteTimezone from './api/delTimezone';
@@ -19,7 +21,7 @@ function App() {
       return getTimezones();
     }
     fetchData().then(({ data }) => {
-      const response = data.timezones.map(tz => ({ label: tz, value: tz }));
+      const response = data.timezones.map(tz => ({ label: parseName(tz), value: tz }));
       setOptions(response);
       setLoading(false);
     });
