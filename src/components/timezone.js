@@ -2,9 +2,9 @@ import React from 'react';
 import TimezoneDetails from './timezone-details';
 import parseName from '../utils/parseNames';
 
-function Timezone({ name, onClose }) {
+function Timezone({ name, isHighlighted, onClose }) {
   return (
-    <li>
+    <li className={`${isHighlighted ? 'highlighted' : ''}`}>
       <div className="content">
         <div className="name">{parseName(name)}</div>
         <TimezoneDetails name={name} />

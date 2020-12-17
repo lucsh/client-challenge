@@ -75,6 +75,12 @@ ul.timezones > li {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
+ul.timezones > li.highlighted {
+    animation-name: highlight;
+    animation-duration: 1s;
+    animation-direction: alternate;
+}
+
 ul.timezones > li > button {
     color: #e00000;
     align-items: center;
@@ -150,3 +156,17 @@ ul.timezones > li > .content > .details > .time.loading {
     }
 }
 
+@keyframes highlight {
+    0% {
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
+    100% {
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1);
+    }
+}
