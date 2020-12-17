@@ -1,13 +1,13 @@
 import axiosRetry from 'axios-retry';
 import { v4 as uuid } from 'uuid';
-import server from './server';
+import api from './api';
 import config from '../config';
 
-axiosRetry(server, { retries: config.apiRetries || Infinity });
+axiosRetry(api, { retries: config.apiRetries || Infinity });
 
 export default name => {
   const encodedName = encodeURIComponent(name);
-  return server({
+  return api({
     method: 'DELETE',
     url: `/${encodedName}`,
     headers: {

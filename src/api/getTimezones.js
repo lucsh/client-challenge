@@ -1,9 +1,9 @@
 import axiosRetry from 'axios-retry';
-import server from './server';
+import api from './api';
 import config from '../config';
 
-axiosRetry(server, { retries: config.apiRetries || Infinity });
+axiosRetry(api, { retries: config.apiRetries || Infinity });
 
 export default () => {
-  return server.get(`${config.apiURL}/`);
+  return api.get(`${config.apiURL}/`);
 };

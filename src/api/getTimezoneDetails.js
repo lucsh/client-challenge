@@ -1,12 +1,12 @@
 import axiosRetry from 'axios-retry';
-import server from './server';
+import api from './api';
 import config from '../config';
 
-axiosRetry(server, { retries: config.apiRetries || Infinity });
+axiosRetry(api, { retries: config.apiRetries || Infinity });
 
 export default name => {
   const encodedName = encodeURIComponent(name);
-  return server({
+  return api({
     method: 'GET',
     url: `/${encodedName}`,
   });
