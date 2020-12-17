@@ -2,7 +2,15 @@ import React from 'react';
 import TimezoneDetails from './timezone-details';
 import parseName from '../utils/parseNames';
 
-function Timezone({ name, isHighlighted, onClose }) {
+/**
+ * Timezone card
+ *
+ *  @param {string} [name] - Timezone name
+ *  @param {boolean} [isHighlighted = false] - if the tz is highlighted
+ *  @param {function} [onClose = () => {}] - delete the timezone
+ */
+
+function Timezone({ name, isHighlighted = false, onClose }) {
   return (
     <li className={`${isHighlighted ? 'highlighted' : ''}`}>
       <div className="content">

@@ -4,6 +4,14 @@ import getDateTime from '../api/getTimezoneDetails';
 import useInterval from '../utils/useInterval';
 import config from '../config';
 
+/**
+ * Timezone Details
+ *
+ * Fetches timezone details with the timezone name
+ *
+ *  @param {string} [name] - Timezone name
+ */
+
 function TimezoneDetails({ name }) {
   const [timezone, setTimezone] = useState({});
   const [refresh, setRefresh] = useState(true);

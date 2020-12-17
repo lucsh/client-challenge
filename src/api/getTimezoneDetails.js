@@ -4,6 +4,11 @@ import config from '../config';
 
 axiosRetry(api, { retries: config.apiRetries || Infinity });
 
+/**
+ * GET a timezone.
+ * @param {string} [name] - Timezone name
+ *
+ */
 export default name => {
   const encodedName = encodeURIComponent(name);
   return api({
