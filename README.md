@@ -27,6 +27,18 @@ cp example.env .env
 yarn start
 ```
 
+## Testing
+
+```bash
+yarn start-dev
+```
+
+in another terminal
+
+```bash
+yarn cypress
+```
+
 ## Building and Using the docker image
 
 ### Build the image
