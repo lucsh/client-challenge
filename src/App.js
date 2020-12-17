@@ -15,6 +15,7 @@ function App() {
   const [options, setOptions] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedTimezones, setSelectedTimezones] = useState([]);
+  const [highlighted, setHighlighted] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,12 +28,21 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHighlighted(null);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [setHighlighted]);
+
   const handleSelectedOptionChange = option => {
     setSelectedOption(option);
     const { value: name } = option;
     if (!selectedTimezones.some(e => e.name === name)) {
       setSelectedTimezones([{ name }, ...selectedTimezones]);
       putTimezone(name);
+    } else {
+      setHighlighted(name);
     }
   };
 
@@ -53,7 +63,7 @@ function App() {
         options={options}
         loading={loading}
       />
-      <Timezones timezones={selectedTimezones} removeTimeZone={handleRemoveTimezone} />
+      <Timezones timezones={selectedTimezones} highlighted={highlighted} removeTimeZone={handleRemoveTimezone} />
     </main>
   );
 }
