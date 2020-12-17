@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
 
 import getDateTime from '../api/getTimezoneDetails';
+import useInterval from '../utils/useInterval';
+import config from '../config';
 
 function TimezoneDetails({ name }) {
   const [timezone, setTimezone] = useState({});
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       return getDateTime(name);
     }
-    fetchData().then(r => {
-      setTimezone(r.data);
-    });
-  }, [name]);
+    if (refresh) {
+      fetchData().then(r => {
+        setTimezone(r.data);
+        setRefresh(false);
+      });
+    }
+  }, [name, refresh]);
+
+  useInterval(() => {
+    setRefresh(true);
+  }, 1000 * config.refreshInterval);
 
   return (
     <div className="details">
-      <div>{!timezone.time ? null : timezone.date}</div>
-      <div>{!timezone.time ? null : timezone.time}</div>
+      <div className={`date ${!timezone.time ? 'loading' : undefined}`}>{!timezone.time ? null : timezone.date}</div>
+      <div className={`time ${!timezone.time ? 'loading' : undefined}`}>{!timezone.time ? null : timezone.time}</div>
     </div>
   );
 }
