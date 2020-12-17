@@ -1,7 +1,14 @@
 import React from 'react';
 import Timezone from './timezone';
+/**
+ * Timezone List
+ *
+ *  @param {array} [timezones] - Selected timezones array
+ *  @param {string} [highlighted] - Highlighted timezone name
+ *  @param {function} [removeTimeZone = () => {}] - remove the timezone
+ */
 
-function Timezones({ timezones = [], highlighted, removeTimeZone }) {
+function Timezones({ timezones = [], highlighted, removeTimeZone = () => {} }) {
   return (
     <section>
       <ul className="timezones">

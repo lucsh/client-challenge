@@ -17,6 +17,7 @@ function App() {
   const [selectedTimezones, setSelectedTimezones] = useState([]);
   const [highlighted, setHighlighted] = useState(null);
 
+  // fetch data on load
   useEffect(() => {
     async function fetchData() {
       return getTimezones();
@@ -28,6 +29,7 @@ function App() {
     });
   }, []);
 
+  // remove highlighted timezone after a second
   useEffect(() => {
     const timer = setTimeout(() => {
       setHighlighted(null);
@@ -35,9 +37,21 @@ function App() {
     return () => clearTimeout(timer);
   }, [setHighlighted]);
 
+  // clear selected option after a second
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSelectedOption(null);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [selectedOption]);
+
+  // change selected option event handler
   const handleSelectedOptionChange = option => {
     setSelectedOption(option);
     const { value: name } = option;
+    // if the option is not in the selected options,
+    // add it to the beginning of the array and hit the server
+    // else set as highlighted for user feedback
     if (!selectedTimezones.some(e => e.name === name)) {
       setSelectedTimezones([{ name }, ...selectedTimezones]);
       putTimezone(name);
@@ -46,11 +60,11 @@ function App() {
     }
   };
 
+  // remove the tz from the list and hit the server
   const handleRemoveTimezone = name => {
     const filtered = selectedTimezones.filter(obj => {
       return obj.name !== name;
     });
-
     setSelectedTimezones(filtered);
     deleteTimezone(name);
   };

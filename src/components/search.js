@@ -13,7 +13,16 @@ const customTheme = theme => ({
   },
 });
 
-function Search({ selectedOption, setSelectedOption, loading = false, options }) {
+/**
+ * Search field
+ *
+ *  @param {array} [options= []] - Options list
+ *  @param {boolean} [loading = false] - if options are loading
+ *  @param {object} [selectedOption = {}] - selected object
+ *  @param {function} [setSelectedOption = () => {}] - selected option controller
+ */
+
+function Search({ selectedOption, setSelectedOption = () => {}, loading = false, options }) {
   return (
     <section className="search-container">
       <label htmlFor="search">Select a timezone:</label>
