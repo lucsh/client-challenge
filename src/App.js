@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import Search from './components/search';
 import getTimezones from './api/getTimezones';
 import putTimezone from './api/putTimezone';
+import deleteTimezone from './api/delTimezone';
+
+import Search from './components/search';
 import Timezones from './components/timezones';
 
 function App() {
@@ -32,6 +34,15 @@ function App() {
     }
   };
 
+  const handleRemoveTimezone = name => {
+    const filtered = selectedTimezones.filter(obj => {
+      return obj.name !== name;
+    });
+
+    setSelectedTimezones(filtered);
+    deleteTimezone(name);
+  };
+
   return (
     <main>
       <Search
@@ -40,7 +51,7 @@ function App() {
         options={options}
         loading={loading}
       />
-      <Timezones timezones={selectedTimezones} />
+      <Timezones timezones={selectedTimezones} removeTimeZone={handleRemoveTimezone} />
     </main>
   );
 }
